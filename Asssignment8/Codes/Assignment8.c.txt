@@ -1,0 +1,35 @@
+//Code written on December 21, 2020
+// by Abhay Suresh
+//This program implements the incremental decoder using boolean logic,obtained from K-MAP(POS) in C 
+
+#include <stdio.h>
+
+//The  main function
+int main(void)
+{
+
+unsigned char  Z=0x01,Y=0x00,X=0x00,W=0x00;//inputs in hex	
+unsigned char one = 0x01;//used for displaying the output in bit
+unsigned char A,B,C,D;//outputs
+
+D = (Z|Y)&((~Y)|X)&(X|(~W))&((~X)|W)&((~Z)|(~X));
+//POS function for D
+
+C = (~Z)&(Z|Y|X)&((~Y)|(~X)|(~W))&((~X)|Y|W);
+//POS function for C
+
+B = ((~X)|(~W))&(X|W)&(~Z);
+//POS function for B
+
+A = ((~Z)|(~Y))&((~Z)|(~X))&(~W);
+//POS function for A
+
+printf("Input for the POS,Boolean Function ZYWX\n");
+printf("%x%x%x%x\n",one&Z,one&Y,one&X,one&W);//Intput ZYXW
+printf(" \n");
+printf("Output for the POS,Boolean Function DCBA\n");
+printf("%x%x%x%x\n" ,one&D,one&C,one&B,one&A);//Output DCBA
+printf(" \n");
+printf("Similarly,rest of the given values of input ZYWX has been pre verified using C");
+return 0;
+}
